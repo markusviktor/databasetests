@@ -1,6 +1,6 @@
 package hu.markusviktor.databasetests.feignclient;
 
-import hu.markusviktor.databasetests.extension.MssqlExtension;
+import hu.markusviktor.databasetests.extension.OracleExtension;
 import hu.markusviktor.databasetests.model.Genre;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,10 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@ExtendWith(MssqlExtension.class)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-class GenreClientMssqlIntegrationTest {
+public abstract class GenreClientIntegrationTest {
 
     @Autowired
     private GenreClient genreClient;

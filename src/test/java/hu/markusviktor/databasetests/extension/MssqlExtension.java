@@ -5,6 +5,7 @@ import org.testcontainers.containers.MSSQLServerContainer;
 public class MssqlExtension extends AbstractTestDatabaseExtension<MSSQLServerContainer<?>> {
     private static final String dockerImageName = "mcr.microsoft.com/mssql/server:latest";
     private static final String migrationSubfolderName = "mssql";
+    public static final String TEST_TAG = "mssql";
 
     @Override
     public MSSQLServerContainer<?> getContainer() {

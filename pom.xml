@@ -130,6 +130,16 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <groups>postgresql, oracle, mssql</groups>
+                    <parallel>classes</parallel>
+                    <useUnlimitedThreads>true</useUnlimitedThreads>
+<!--                  oracle is slow  -->
+                    <parallelTestTimeoutForcedInSeconds>300</parallelTestTimeoutForcedInSeconds>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

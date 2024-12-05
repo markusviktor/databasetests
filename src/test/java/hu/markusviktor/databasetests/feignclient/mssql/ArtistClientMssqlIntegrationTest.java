@@ -1,7 +1,12 @@
-package hu.markusviktor.databasetests.feignclient;
+package hu.markusviktor.databasetests.feignclient.mssql;
 
+import hu.markusviktor.databasetests.extension.MssqlExtension;
 import hu.markusviktor.databasetests.extension.PostgresqlExtension;
+import hu.markusviktor.databasetests.feignclient.ArtistClient;
+import hu.markusviktor.databasetests.feignclient.ArtistClientIntegrationTest;
 import hu.markusviktor.databasetests.model.Artist;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,25 +17,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Tags({
+        @Tag("integration"),
+        @Tag(MssqlExtension.TEST_TAG)
+})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ExtendWith(PostgresqlExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-class ArtistClientMssqlIntegrationTest {
+class ArtistClientMssqlIntegrationTest extends ArtistClientIntegrationTest {
 
-    @Autowired
-    private ArtistClient artistClient;
 
-    @Test
-    void integrationTest() {
-        List<Artist> allArtists = artistClient.getAllArtists();
-        assertEquals(0, allArtists.size());
-
-        Artist testArtist = new Artist();
-        testArtist.setName("Green Day");
-        Artist createdArtist = artistClient.createArtist(testArtist);
-        assertEquals(testArtist.getName(), createdArtist.getName());
-
-        allArtists = artistClient.getAllArtists();
-        assertEquals(1, allArtists.size());
-    }
 }
